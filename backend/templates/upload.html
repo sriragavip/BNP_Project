@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Files</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    input[type="file"] {
+      margin-bottom: 15px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .file-list {
+      margin-top: 20px;
+      padding: 10px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .file-list ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .file-list li {
+      margin: 10px 0;
+    }
+
+    .file-list a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .file-list a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Upload Files</h1>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <label for="yesterday-file">Yesterday's File:</label>
+    <input type="file" id="yesterday-file" name="yesterday_file" required>
+    <br>
+    <label for="today-file">Today's File:</label>
+    <input type="file" id="today-file" name="today_file" required>
+    <br>
+    <button type="submit">Upload and Process</button>
+  </form>
+
+  <div class="file-list">
+    <h2>Available Files for Download</h2>
+    <ul>
+      {% for file in uploaded_files %}
+        <li><a href="/uploads/{{ file }}">{{ file }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>
